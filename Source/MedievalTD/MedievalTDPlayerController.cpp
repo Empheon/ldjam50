@@ -17,7 +17,7 @@ void AMedievalTDPlayerController::OnPlaceBuildingPressed(int x, int y)
 	this->Money -= this->SelectedBuilding.Price;
 
 	const FRotator myRot(0, 0, 0);
-	const FVector myLoc(x, y, 100);
+	const FVector myLoc(x, y, 0);
 
 	GetWorld()->SpawnActor(this->SelectedBuilding.Building, &myLoc, &myRot);
 }

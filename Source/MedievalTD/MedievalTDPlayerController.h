@@ -30,7 +30,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		FSelectedBuilding SelectedBuilding;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		int Money = 50;
+		int Money = 500;
 	UFUNCTION(BlueprintCallable)
 		void OnPlaceBuildingPressed(int x, int y);
 	// Called every frame
