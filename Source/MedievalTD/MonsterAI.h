@@ -45,12 +45,14 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void OnBuildingCollisionStart();
+	
+	UFUNCTION(BlueprintCallable)
 	void OnBuildingCollisionEnd();
 
 private:
 	MonsterState m_monsterState = RUN;
 
-	float m_attackInterval;
+	float m_attackInterval = 1.0f;
 	float m_attackTimer;
 
 	void Attack();
