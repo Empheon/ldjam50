@@ -6,10 +6,20 @@
 #include "generator.h"
 #include "tower.h"
 
-void AMedievalTDPlayerController::OnPlaceBuildingPressed(int x, int y)
+void AMedievalTDPlayerController::OnPlaceBuildingPressed(int x, int y, TArray<AActor*> collisions)
 {
 	if (this->SelectedBuilding.Building == NULL)
 		return;
+
+	 UE_LOG(LogTemp, Warning, TEXT("A"));
+	if (this->SelectedBuilding.RequiredActor != NULL) {
+		if (!this->RequiredActorExists(this->SelectedBuilding.RequiredActor, collisions))
+			return;
+	} else if (collisions.Num() > 1) {
+		return;
+	}
+
+	UE_LOG(LogTemp, Warning, TEXT("B"));
 
 	if (this->SelectedBuilding.Price > this->Money)
 		return;
@@ -33,4 +43,14 @@ void AMedievalTDPlayerController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+bool AMedievalTDPlayerController::RequiredActorExists(UClass* requiredActor, TArray<AActor*> collisions)
+{
+	for (auto& collision : collisions) {
+		if (collision->IsA(requiredActor)) {
+			return true;
+		}
+	}
+	return false;
 }

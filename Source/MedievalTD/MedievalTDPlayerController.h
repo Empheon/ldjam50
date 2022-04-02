@@ -16,6 +16,8 @@ struct FSelectedBuilding
     UClass* Building;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
     int Price;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UClass* RequiredActor;
 };
 
 /**
@@ -32,12 +34,15 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		int Money = 500;
 	UFUNCTION(BlueprintCallable)
-		void OnPlaceBuildingPressed(int x, int y);
+		void OnPlaceBuildingPressed(int x, int y, TArray<AActor*> collisions);
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+private:
+	bool RequiredActorExists(UClass* requiredActor, TArray<AActor*> collisions);
 	
 };
