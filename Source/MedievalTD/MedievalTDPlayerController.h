@@ -2,9 +2,21 @@
 
 #pragma once
 
+#include <map>
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
 #include "MedievalTDPlayerController.generated.h"
+
+USTRUCT(BlueprintType)
+struct FSelectedBuilding
+{
+    GENERATED_BODY()
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    UClass* Building;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    int Price;
+};
 
 /**
  * 
@@ -14,8 +26,18 @@ class MEDIEVALTD_API AMedievalTDPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 	
-	public:
-		UFUNCTION(BlueprintCallable)
-		void OnPlaceBuildingPressed(UClass* actor, int x, int y);
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FSelectedBuilding SelectedBuilding;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		int Money = 50;
+	UFUNCTION(BlueprintCallable)
+		void OnPlaceBuildingPressed(int x, int y);
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
 
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+	
 };
