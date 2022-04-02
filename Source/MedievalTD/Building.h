@@ -21,8 +21,6 @@ public:
 	float Health = 100;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool Upgradable = false;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int Price = 10;
 	// Sets default values for this actor's properties
 	ABuilding();
 	// Called every frame
