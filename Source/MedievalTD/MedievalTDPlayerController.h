@@ -15,8 +15,6 @@ struct FSelectedBuilding
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     UClass* Building;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-    int Price;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UClass* RequiredActor;
 };
 

@@ -4,6 +4,8 @@
 #include "MedievalTDPlayerController.h"
 #include "Building.h"
 #include "generator.h"
+#include "MedievalTDGameModeBase.h"
+#include "Kismet/GameplayStatics.h"
 #include "tower.h"
 
 void AMedievalTDPlayerController::OnPlaceBuildingPressed(int x, int y, TArray<AActor*> collisions)
@@ -14,19 +16,29 @@ void AMedievalTDPlayerController::OnPlaceBuildingPressed(int x, int y, TArray<AA
 	if (this->SelectedBuilding.RequiredActor != NULL) {
 		if (!this->RequiredActorExists(this->SelectedBuilding.RequiredActor, collisions))
 			return;
-	} else if (collisions.Num() > 0) {
+	}
+	else if (collisions.Num() > 0) {
 		return;
 	}
 
-	if (this->SelectedBuilding.Price > this->Money)
+	auto gameMode = Cast<AMedievalTDGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
+
+	auto price = 0;
+	if (gameMode->PriceMap.Contains(this->SelectedBuilding.Building))
+		price = *(gameMode->PriceMap.Find(this->SelectedBuilding.Building));
+
+	if (price > this->Money)
 		return;
 
-	this->Money -= this->SelectedBuilding.Price;
+	this->Money -= price;
 
 	const FRotator myRot(0, 0, 0);
 	const FVector myLoc(x, y, 0);
 
-	GetWorld()->SpawnActor(this->SelectedBuilding.Building, &myLoc, &myRot);
+	auto newActor = GetWorld()->SpawnActor(this->SelectedBuilding.Building, &myLoc, &myRot);
+	auto newBuilding = (ABuilding*)newActor;
+	gameMode->AddBuilding(newBuilding);
+
 }
 
 // Called when the game starts or when spawned
