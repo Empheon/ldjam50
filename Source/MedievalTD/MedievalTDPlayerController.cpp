@@ -11,15 +11,12 @@ void AMedievalTDPlayerController::OnPlaceBuildingPressed(int x, int y, TArray<AA
 	if (this->SelectedBuilding.Building == NULL)
 		return;
 
-	 UE_LOG(LogTemp, Warning, TEXT("A"));
 	if (this->SelectedBuilding.RequiredActor != NULL) {
 		if (!this->RequiredActorExists(this->SelectedBuilding.RequiredActor, collisions))
 			return;
-	} else if (collisions.Num() > 1) {
+	} else if (collisions.Num() > 0) {
 		return;
 	}
-
-	UE_LOG(LogTemp, Warning, TEXT("B"));
 
 	if (this->SelectedBuilding.Price > this->Money)
 		return;
