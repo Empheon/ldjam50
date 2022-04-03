@@ -4,6 +4,16 @@
 #include "MonsterAI.h"
 #include "FWaveDefinition.generated.h"
 
+UENUM(BlueprintType)
+enum ESpawnSide
+{
+	TOP,
+	BOTTOM,
+	LEFT,
+	RIGHT,
+};
+
+
 USTRUCT(BlueprintType)
 struct FWaveDefinition
 {
@@ -15,4 +25,8 @@ public:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float TotalSpawnTime = 5;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<TEnumAsByte<ESpawnSide>> EnabledSpawnSides;
 };
+

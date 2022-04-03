@@ -60,7 +60,7 @@ public:
 		int32 WaveIndex;
 
 	UPROPERTY(BlueprintReadOnly)
-		int32 IsWaveOngoing;
+		bool IsWaveOngoing;
 
 	UPROPERTY(BlueprintReadOnly)
 		int32 WaveRemainingMonsters;

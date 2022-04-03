@@ -136,7 +136,7 @@ void AMedievalTDGameModeBase::SpawnRandomMob()
 {
 	const int32 count = RemainingMobToSpawn.Num();
 
-	const int32 indexToPickFrom = FMath::RandRange(0, count);
+	const int32 indexToPickFrom = FMath::RandRange(0, count - 1);
 
 	TSubclassOf<AMonsterAI> pickedMob = nullptr;
 	int i = 0;
@@ -162,9 +162,45 @@ void AMedievalTDGameModeBase::SpawnRandomMob()
 			RemainingMobToSpawn.Remove(pickedMob);
 		}
 
-		const FVector spawnLocation = CrystalPosition - FVector(1000, FMath::RandRange(-300, 300), 0);
+		ESpawnSide side = BOTTOM;
+		if(CurrentWaveDefinition->EnabledSpawnSides.Num() > 0)
+		{
+			const int32 randomSide = FMath::RandRange(0, CurrentWaveDefinition->EnabledSpawnSides.Num() - 1);
+			side = CurrentWaveDefinition->EnabledSpawnSides[randomSide];
+		}
+
+		const float horizontal = 5000;
+		const float vertical = 4000;
+		FVector spawnLocation;
+		switch (side)
+		{
+			case TOP:
+			{
+				spawnLocation = CrystalPosition + FVector(2800, FMath::RandRange(-horizontal, horizontal), 0);
+				break;
+			}
+			case BOTTOM:
+			{
+				spawnLocation = CrystalPosition - FVector(2800, FMath::RandRange(-horizontal, horizontal), 0);
+				break;
+			}
+			case LEFT:
+			{
+				spawnLocation = CrystalPosition - FVector(FMath::RandRange(-vertical, vertical), 3900, 0);
+				break;
+			}
+			case RIGHT:
+			{
+				spawnLocation = CrystalPosition + FVector(FMath::RandRange(-vertical, vertical), 3900, 0);
+				break;
+			}
+			default: ;
+		}
+		
 		const FRotator rot = (CrystalPosition - spawnLocation).GetSafeNormal().Rotation();
-		AMonsterAI* MonsterAI = Cast<AMonsterAI>(GetWorld()->SpawnActor(pickedMob, &spawnLocation, &rot));
+		FActorSpawnParameters SpawnParameters;
+		SpawnParameters.bNoFail = true;
+		AMonsterAI* MonsterAI = Cast<AMonsterAI>(GetWorld()->SpawnActor(pickedMob, &spawnLocation, &rot, SpawnParameters));
 		MonsterAI->TargetLocation = CrystalPosition;
 	}
 }
