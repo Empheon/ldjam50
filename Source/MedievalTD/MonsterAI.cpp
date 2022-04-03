@@ -50,9 +50,6 @@ void AMonsterAI::Tick(float DeltaTime)
 		SetActorLocation(newPos);
 	}
 
-        SetActorLocation(newPos, true);
-    }
-
     if (MonsterState == ATTACK)
     {
         m_attackTimer -= DeltaTime;
