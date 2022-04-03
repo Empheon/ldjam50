@@ -38,6 +38,9 @@ public:
 		float Health = 10.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		int MoneyGiven = 1;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool IsFlying = false;
 
 	UPROPERTY(BlueprintReadOnly)

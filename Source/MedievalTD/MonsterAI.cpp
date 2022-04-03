@@ -4,7 +4,9 @@
 
 #include "Building.h"
 #include "MedievalTDGameModeBase.h"
+#include "MedievalTDPlayerController.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
 
 // Sets default values
@@ -92,6 +94,12 @@ void AMonsterAI::TakeHit(float damage)
 		{
 			GameModeBase->WaveRemainingMonsters--;
 		}
+		
+	    AMedievalTDPlayerController* pc = Cast<AMedievalTDPlayerController>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
+	    if(pc)
+	    {
+	    	pc->Money += MoneyGiven;
+	    }
 		Destroy();
 	}
 }
