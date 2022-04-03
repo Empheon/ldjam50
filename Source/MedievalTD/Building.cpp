@@ -35,8 +35,15 @@ void ABuilding::Upgrade()
     if (this->Level >= this->LevelMeshes.Num() - 1)
         return;
     this->Level++;
-    auto rootComponent = Cast<UStaticMeshComponent>(this->RootComponent);
-    rootComponent->SetStaticMesh(this->LevelMeshes[this->Level]);
+    TArray<USceneComponent*> children;
+    this->RootComponent->GetChildrenComponents(true, children);
+    for (auto i = 0; i < children.Num(); i++) {
+        auto component = Cast<UStaticMeshComponent>(children[i]);
+        if (component) {
+            component->SetStaticMesh(this->LevelMeshes[this->Level]);
+            break;
+        }
+    }
 }
 
 void ABuilding::TakeHit(float damage)
