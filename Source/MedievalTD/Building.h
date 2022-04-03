@@ -25,6 +25,9 @@ public:
 		virtual void Destroy();
 	UFUNCTION(BlueprintCallable)
 		virtual void Upgrade();
+
+	void TakeHit(float damage);
+	
 	// Sets default values for this actor's properties
 	ABuilding();
 	// Called every frame

@@ -41,3 +41,12 @@ void ABuilding::Upgrade()
 	auto rootComponent = Cast<UStaticMeshComponent>(this->RootComponent);
 	rootComponent->SetStaticMesh(this->LevelMeshes[this->Level++]);
 }
+
+void ABuilding::TakeHit(float damage)
+{
+	Health -= damage;
+	if (Health <= 0)
+	{
+		Destroy();
+	}
+}
