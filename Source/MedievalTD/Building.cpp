@@ -27,6 +27,7 @@ void ABuilding::Destroy()
 {
     auto gameMode = Cast<AMedievalTDGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
     gameMode->RemoveBuilding(this);
+	AActor::Destroy();
 }
 
 void ABuilding::Upgrade()
