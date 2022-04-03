@@ -1,6 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
+#include "MedievalTDGameModeBase.h"
+#include "Kismet/GameplayStatics.h"
 #include "Building.h"
 
 // Sets default values
@@ -23,4 +25,19 @@ void ABuilding::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void ABuilding::Destroy()
+{
+	auto gameMode = Cast<AMedievalTDGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
+	gameMode->RemoveBuilding(this);
+}
+
+void ABuilding::Upgrade()
+{
+	if (this->Level >= this->LevelMeshes.Num())
+		return;
+	this->Level++;
+	auto rootComponent = Cast<UStaticMeshComponent>(this->RootComponent);
+	rootComponent->SetStaticMesh(this->LevelMeshes[this->Level++]);
 }

@@ -16,11 +16,15 @@ class MEDIEVALTD_API ABuilding : public AActor
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int Level = 0;
+		TArray<UStaticMesh*> LevelMeshes;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float Health = 100;
+		int Level = 0;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	bool Upgradable = false;
+		float Health = 100;
+	UFUNCTION(BlueprintCallable)
+		virtual void Destroy();
+	UFUNCTION(BlueprintCallable)
+		virtual void Upgrade();
 	// Sets default values for this actor's properties
 	ABuilding();
 	// Called every frame
