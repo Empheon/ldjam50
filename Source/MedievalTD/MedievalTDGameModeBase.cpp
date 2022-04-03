@@ -38,6 +38,12 @@ AMedievalTDGameModeBase::AMedievalTDGameModeBase()
 	PrimaryActorTick.bCanEverTick = true;
 }
 
+void AMedievalTDGameModeBase::EndWave()
+{
+	IsWaveOngoing = false;
+	WaveIndex++;
+}
+
 // Called when the game starts or when spawned
 void AMedievalTDGameModeBase::BeginPlay()
 {
@@ -87,6 +93,11 @@ void AMedievalTDGameModeBase::TickWave(float DeltaSeconds)
 			SpawnRandomMob();
 			SpawnMobTimer -= SpawnMobInterval;
 		}
+	}
+
+	if(WaveRemainingMonsters <= 0)
+	{
+		EndWave();
 	}
 }
 

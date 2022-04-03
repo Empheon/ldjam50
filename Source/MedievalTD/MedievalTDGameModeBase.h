@@ -21,6 +21,7 @@ protected:
     virtual void BeginPlay() override;
     AMedievalTDGameModeBase();
 
+    void EndWave();
     void TickWave(float DeltaSeconds);
 
     void StartNextWave();
