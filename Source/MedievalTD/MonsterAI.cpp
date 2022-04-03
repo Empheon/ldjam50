@@ -14,6 +14,7 @@ AMonsterAI::AMonsterAI()
 	PrimaryActorTick.bCanEverTick = true;
 
 	SkMeshComponent = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("MonsterMesh"));
+	SkMeshComponent->SetEnableGravity(false);
 	RootComponent = SkMeshComponent;
 }
 
@@ -21,7 +22,6 @@ AMonsterAI::AMonsterAI()
 void AMonsterAI::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
@@ -29,9 +29,19 @@ void AMonsterAI::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (IsFlying)
+	{
+		TargetLocation.Z = 250;
+		FVector pos = GetActorLocation();
+		pos.Z = 250;
+		SetActorLocation(pos);
+	}
+
+	FRotator targetRotation;
+
 	if (MonsterState == RUN)
 	{
-		SetActorRotation(UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), TargetLocation));
+		targetRotation = UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), TargetLocation);
 
 		FVector newPos = FMath::VInterpConstantTo(GetActorLocation(), TargetLocation, DeltaTime, Speed);
 		VelocityMagnitude = (GetActorLocation() - newPos).Size() * Speed;
@@ -49,7 +59,13 @@ void AMonsterAI::Tick(float DeltaTime)
 
 			Attack();
 		}
+
+		FVector buildingLocation = m_currentBuilding->GetActorLocation();
+		buildingLocation.Z = IsFlying ? 250 : buildingLocation.Z;
+		targetRotation = UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), buildingLocation);
 	}
+	
+	SetActorRotation(FMath::RInterpTo(GetActorRotation(), targetRotation, DeltaTime, 5));
 }
 
 void AMonsterAI::OnBuildingCollisionStart(ABuilding* building)
