@@ -20,52 +20,54 @@ UCLASS()
 class MEDIEVALTD_API AMonsterAI : public AActor, public IHealth
 {
 	GENERATED_BODY()
-	
-public:	
+
+public:
 	// Sets default values for this actor's properties
 	AMonsterAI();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FVector TargetLocation;
+		FVector TargetLocation;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float Speed = 100.0f;
+		float Speed = 100.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float Damage = 20.0f;
+		float Damage = 20.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float Health = 10.0f;
+		float Health = 10.0f;
 
 	UPROPERTY(BlueprintReadOnly)
-	float VelocityMagnitude;
+		float VelocityMagnitude;
 
 	UPROPERTY(VisibleAnywhere)
-	USkeletalMeshComponent* SkMeshComponent;
+		USkeletalMeshComponent* SkMeshComponent;
 
 	UPROPERTY(BlueprintReadOnly)
-	TEnumAsByte<EMonsterState> MonsterState = RUN;
+		TEnumAsByte<EMonsterState> MonsterState = RUN;
 
 	float GetHealth_Implementation() override;
+	float GetBaseHealth_Implementation() override;
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	UFUNCTION(BlueprintCallable)
-	void OnBuildingCollisionStart(ABuilding* building);
-	
+		void OnBuildingCollisionStart(ABuilding* building);
+
 	UFUNCTION(BlueprintCallable)
-	void OnBuildingCollisionEnd();
+		void OnBuildingCollisionEnd();
 
 	void TakeHit(float damage);
 
 private:
 
+	float BaseHealth = 100;
 	float m_attackInterval = 1.0f;
 	float m_attackTimer;
 	ABuilding* m_currentBuilding;

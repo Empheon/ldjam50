@@ -19,4 +19,6 @@ class IHealth
 public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 		float GetHealth();
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+		float GetBaseHealth();
 };

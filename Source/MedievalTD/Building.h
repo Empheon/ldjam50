@@ -29,6 +29,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 		virtual void Upgrade();
 	float GetHealth_Implementation() override;
+	float GetBaseHealth_Implementation() override;
 	void TakeHit(float damage);
 
 	// Sets default values for this actor's properties
@@ -40,4 +41,6 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+private:
+	float BaseHealth = 100;
 };

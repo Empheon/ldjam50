@@ -21,7 +21,7 @@ AMonsterAI::AMonsterAI()
 void AMonsterAI::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	this->BaseHealth = this->Health;
 }
 
 // Called every frame
@@ -87,4 +87,8 @@ void AMonsterAI::Attack()
 
 float AMonsterAI::GetHealth_Implementation() {
 	return this->Health;
+}
+
+float AMonsterAI::GetBaseHealth_Implementation() {
+	return this->BaseHealth;
 }
