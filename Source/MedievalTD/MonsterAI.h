@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Building.h"
+#include "Health.h"
 #include "GameFramework/Actor.h"
 #include "MonsterAI.generated.h"
 
@@ -16,7 +17,7 @@ enum EMonsterState
 };
 
 UCLASS()
-class MEDIEVALTD_API AMonsterAI : public AActor
+class MEDIEVALTD_API AMonsterAI : public AActor, public IHealth
 {
 	GENERATED_BODY()
 	
@@ -44,6 +45,8 @@ public:
 
 	UPROPERTY(BlueprintReadOnly)
 	TEnumAsByte<EMonsterState> MonsterState = RUN;
+
+	float GetHealth_Implementation() override;
 
 protected:
 	// Called when the game starts or when spawned

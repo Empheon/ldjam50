@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Health.h"
 #include "GameFramework/Actor.h"
 #include "Building.generated.h"
 
@@ -10,7 +11,7 @@
  *
  */
 UCLASS()
-class MEDIEVALTD_API ABuilding : public AActor
+class MEDIEVALTD_API ABuilding : public AActor, public IHealth
 {
 	GENERATED_BODY()
 
@@ -27,9 +28,9 @@ public:
 		virtual void Destroy();
 	UFUNCTION(BlueprintCallable)
 		virtual void Upgrade();
-
+	float GetHealth_Implementation() override;
 	void TakeHit(float damage);
-	
+
 	// Sets default values for this actor's properties
 	ABuilding();
 	// Called every frame

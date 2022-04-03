@@ -85,3 +85,6 @@ void AMonsterAI::Attack()
 	m_currentBuilding->TakeHit(Damage);
 }
 
+float AMonsterAI::GetHealth_Implementation() {
+	return this->Health;
+}

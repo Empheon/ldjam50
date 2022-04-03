@@ -54,3 +54,7 @@ void ABuilding::TakeHit(float damage)
         Destroy();
     }
 }
+
+float ABuilding::GetHealth_Implementation() {
+    return this->Health;
+}
