@@ -120,10 +120,13 @@ void AMedievalTDGameModeBase::StartNextWave()
 
 	RemainingMobToSpawn.Empty();
 
+	float additionalMobFactor = FMath::Max(0, WaveIndex - WaveDefinitions.Num() + 1);
+	float multiplier = (1 + 0.2f * additionalMobFactor);
+
 	for (auto MobCount : CurrentWaveDefinition->MobCount)
 	{
-		WaveRemainingMonsters += MobCount.Value;
-		RemainingMobToSpawn.Add(MobCount.Key, MobCount.Value);
+		WaveRemainingMonsters += MobCount.Value * multiplier;
+		RemainingMobToSpawn.Add(MobCount.Key, MobCount.Value * multiplier);
 	}
 
 	SpawnMobInterval = CurrentWaveDefinition->TotalSpawnTime / WaveRemainingMonsters;
