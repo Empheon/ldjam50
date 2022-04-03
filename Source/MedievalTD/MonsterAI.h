@@ -37,6 +37,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float Health = 10.0f;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool IsFlying = false;
+
 	UPROPERTY(BlueprintReadOnly)
 		float VelocityMagnitude;
 
