@@ -3,8 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "BuildLevelDefinition.h"
 #include "Health.h"
 #include "GameFramework/Actor.h"
+#include "BuildLevelDefinition.h"
 #include "Building.generated.h"
 
 /**
@@ -17,7 +19,7 @@ class MEDIEVALTD_API ABuilding : public AActor, public IHealth
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		TArray<UStaticMesh*> LevelMeshes;
+		TArray<FBuildLevelDefinition> LevelDefinitions;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		int Level = 0;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

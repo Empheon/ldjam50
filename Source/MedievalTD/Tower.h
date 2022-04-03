@@ -39,21 +39,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FVector ProjectileSpawnLocation;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TSubclassOf<AProjectile> ProjectileClass;
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float ShootCooldownDuration;
-	
 	UPROPERTY(BlueprintReadOnly)
 	float TimeBeforeNextShoot;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int Damage;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float ImpactRadius;
-
 	UFUNCTION(BlueprintImplementableEvent)
 	void OnShoot(FVector direction);
 private:

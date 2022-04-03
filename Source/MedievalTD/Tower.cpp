@@ -23,7 +23,7 @@ void ATower::BeginPlay()
 {
 	Super::BeginPlay();
 
-	TimeBeforeNextShoot = ShootCooldownDuration;
+	TimeBeforeNextShoot = LevelDefinitions[Level].ShootCooldownDuration;
 }
 
 void ATower::Tick(float DeltaSeconds)
@@ -35,7 +35,7 @@ void ATower::Tick(float DeltaSeconds)
 	{
 		if(TryShoot())
 		{
-			TimeBeforeNextShoot = ShootCooldownDuration;
+			TimeBeforeNextShoot = LevelDefinitions[Level].ShootCooldownDuration;
 		}
 	}
 }
@@ -58,15 +58,15 @@ bool ATower::TryShoot()
 		}
 	}
 
-	if(minMonster && ProjectileClass)
+	if(minMonster && LevelDefinitions[Level].ProjectileClass)
 	{
 		const FVector spawnPoint = GetActorTransform().TransformPosition(ProjectileSpawnLocation);
-		AProjectile* Projectile = Cast<AProjectile>(GetWorld()->SpawnActor(ProjectileClass, &spawnPoint));
+		AProjectile* Projectile = Cast<AProjectile>(GetWorld()->SpawnActor(LevelDefinitions[Level].ProjectileClass, &spawnPoint));
 		if(Projectile)
 		{
 			FVector dir = Projectile->LaunchToTarget(*minMonster);
-			Projectile->Damage = Damage;
-			Projectile->ImpactRadius = ImpactRadius;
+			Projectile->Damage = LevelDefinitions[Level].Damage;
+			Projectile->ImpactRadius = LevelDefinitions[Level].ImpactRadius;
 			OnShoot(dir);
 			return true;
 		}

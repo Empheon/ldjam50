@@ -2,6 +2,7 @@
 
 #include "Building.h"
 #include "MedievalTDGameModeBase.h"
+#include "MedievalTDPlayerController.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values
@@ -33,16 +34,25 @@ void ABuilding::Destroy()
 
 void ABuilding::Upgrade()
 {
-	if (this->Level >= this->LevelMeshes.Num() - 1)
+	if (this->Level >= this->LevelDefinitions.Num() - 1)
 		return;
-	this->Level++;
-	TArray<USceneComponent*> children;
-	this->RootComponent->GetChildrenComponents(true, children);
-	for (auto i = 0; i < children.Num(); i++) {
-		auto component = Cast<UStaticMeshComponent>(children[i]);
-		if (component) {
-			component->SetStaticMesh(this->LevelMeshes[this->Level]);
-			break;
+	
+
+	auto currentPrice = LevelDefinitions[Level].NextUpgradeCost;
+	AMedievalTDPlayerController* pc = Cast<AMedievalTDPlayerController>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
+	if(pc && pc->Money >= currentPrice)
+	{
+		pc->Money -= currentPrice;
+		
+		this->Level++;
+		TArray<USceneComponent*> children;
+		this->RootComponent->GetChildrenComponents(true, children);
+		for (auto i = 0; i < children.Num(); i++) {
+			auto component = Cast<UStaticMeshComponent>(children[i]);
+			if (component) {
+				component->SetStaticMesh(this->LevelDefinitions[this->Level].LevelMesh);
+				break;
+			}
 		}
 	}
 }
