@@ -24,6 +24,7 @@ AMonsterAI::AMonsterAI()
 void AMonsterAI::BeginPlay()
 {
     Super::BeginPlay();
+	SetActorScale3D(GetActorScale3D() * 0.7f);
     this->BaseHealth = this->Health;
 }
 
