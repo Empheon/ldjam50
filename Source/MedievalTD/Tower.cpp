@@ -64,7 +64,9 @@ bool ATower::TryShoot()
 		AProjectile* Projectile = Cast<AProjectile>(GetWorld()->SpawnActor(ProjectileClass, &spawnPoint));
 		if(Projectile)
 		{
-			Projectile->LaunchToTarget(*minMonster);
+			FVector dir = Projectile->LaunchToTarget(*minMonster);
+			Projectile->Damage = Damage;
+			OnShoot(dir);
 			return true;
 		}
 		

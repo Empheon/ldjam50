@@ -50,7 +50,7 @@ void AProjectile::Tick(float DeltaTime)
 	}
 }
 
-void AProjectile::LaunchToTarget(AMonsterAI& target)
+FVector AProjectile::LaunchToTarget(AMonsterAI& target)
 {
 	FVector projectileStartPoint = GetActorLocation();
 	
@@ -96,11 +96,15 @@ void AProjectile::LaunchToTarget(AMonsterAI& target)
 	}
 	
 	FVector diff = (targetPosition - projectileStartPoint);
-	ProjectileMovement->Velocity = diff.GetSafeNormal() * ProjectileMovement->MaxSpeed;
+	FVector dir = diff.GetSafeNormal();
+	ProjectileMovement->Velocity = dir * ProjectileMovement->MaxSpeed;
+	
 	
 	DrawDebugSphere(GetWorld(), enemyStartPoint, 50, 26, FColor(181,0,0), false, 1, 0, 2);
 	DrawDebugSphere(GetWorld(), targetPosition, 40, 26, FColor(0,0,181), false, 1, 0, 2);
 	DrawDebugSphere(GetWorld(), projectileStartPoint, 30, 26, FColor(0,181,0), false, 1, 0, 2);
+
+	return dir;
 }
 
 void AProjectile::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)

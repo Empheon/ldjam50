@@ -47,6 +47,12 @@ public:
 	
 	UPROPERTY(BlueprintReadOnly)
 	float TimeBeforeNextShoot;
+
+	UPROPERTY(BlueprintReadOnly)
+	int Damage;
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnShoot(FVector direction);
 private:
 	TArray<AMonsterAI*> MonstersInRange;
 };

@@ -43,7 +43,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	virtual void LaunchToTarget(AMonsterAI& target);
+	virtual FVector LaunchToTarget(AMonsterAI& target);
 
 	void OnImpact(AActor* OtherActor);
 	
