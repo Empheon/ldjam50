@@ -101,9 +101,9 @@ FVector AProjectile::LaunchToTarget(AMonsterAI& target)
 	ProjectileMovement->Velocity = dir * ProjectileMovement->MaxSpeed;
 	
 	
-	DrawDebugSphere(GetWorld(), enemyStartPoint, 50, 26, FColor(181,0,0), false, 1, 0, 2);
-	DrawDebugSphere(GetWorld(), targetPosition, 40, 26, FColor(0,0,181), false, 1, 0, 2);
-	DrawDebugSphere(GetWorld(), projectileStartPoint, 30, 26, FColor(0,181,0), false, 1, 0, 2);
+	//DrawDebugSphere(GetWorld(), enemyStartPoint, 50, 26, FColor(181,0,0), false, 1, 0, 2);
+	//DrawDebugSphere(GetWorld(), targetPosition, 40, 26, FColor(0,0,181), false, 1, 0, 2);
+	//DrawDebugSphere(GetWorld(), projectileStartPoint, 30, 26, FColor(0,181,0), false, 1, 0, 2);
 
 	return dir;
 }
