@@ -35,9 +35,9 @@ void ABuilding::Destroy()
 
 void ABuilding::Upgrade()
 {
-	if (this->Level >= this->LevelMeshes.Num())
+	if (this->Level >= this->LevelMeshes.Num() - 1)
 		return;
 	this->Level++;
 	auto rootComponent = Cast<UStaticMeshComponent>(this->RootComponent);
-	rootComponent->SetStaticMesh(this->LevelMeshes[this->Level++]);
+	rootComponent->SetStaticMesh(this->LevelMeshes[this->Level]);
 }

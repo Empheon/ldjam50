@@ -14,70 +14,70 @@
 UCLASS()
 class MEDIEVALTD_API AMedievalTDGameModeBase : public AGameModeBase
 {
-    GENERATED_BODY()
+	GENERATED_BODY()
 
 protected:
-    // Called when the game starts or when spawned
-    virtual void BeginPlay() override;
-    AMedievalTDGameModeBase();
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+	AMedievalTDGameModeBase();
 
-    void EndWave();
-    void TickWave(float DeltaSeconds);
+	void EndWave();
+	void TickWave(float DeltaSeconds);
 
-    void StartNextWave();
+	void StartNextWave();
 
-    void TickBetweenWave(float DeltaSeconds);
+	void TickBetweenWave(float DeltaSeconds);
 
-    virtual void Tick(float DeltaSeconds) override;
+	virtual void Tick(float DeltaSeconds) override;
 
-    void SpawnRandomMob();
+	void SpawnRandomMob();
 
 public:
-    UPROPERTY(EditAnywhere, BlueprintReadWrite)
-    TMap<TSubclassOf<ABuilding>, int> PriceMap;
-    UPROPERTY(EditAnywhere, BlueprintReadWrite)
-    TMap<TSubclassOf<ABuilding>, int> PriceIncreaseMap;
-    UPROPERTY(EditAnywhere, BlueprintReadWrite)
-    TArray<ABuilding *> Buildings;
-    UFUNCTION(BlueprintCallable)
-    void AddBuilding(ABuilding *building);
-    UFUNCTION(BlueprintCallable)
-    void RemoveBuilding(ABuilding *building);
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		TMap<TSubclassOf<ABuilding>, int> PriceMap;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		TMap<TSubclassOf<ABuilding>, int> PriceIncreaseMap;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		TArray<ABuilding*> Buildings;
+	UFUNCTION(BlueprintCallable)
+		void AddBuilding(ABuilding* building);
+	UFUNCTION(BlueprintCallable)
+		void RemoveBuilding(ABuilding* building);
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite)
-    UClass *CrystalPedestalClass;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UClass* CrystalPedestalClass;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite)
-    float TimeBetweenWaves;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float TimeBetweenWaves;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite)
-    TArray<FWaveDefinition> WaveDefinitions;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		TArray<FWaveDefinition> WaveDefinitions;
 
-    UPROPERTY(BlueprintReadOnly)
-    float TimeBeforeNextWave = 10;
+	UPROPERTY(BlueprintReadOnly)
+		float TimeBeforeNextWave = 10;
 
-    UPROPERTY(BlueprintReadOnly)
-    int32 WaveIndex;
+	UPROPERTY(BlueprintReadOnly)
+		int32 WaveIndex;
 
-    UPROPERTY(BlueprintReadOnly)
-    int32 IsWaveOngoing;
+	UPROPERTY(BlueprintReadOnly)
+		int32 IsWaveOngoing;
 
-    UPROPERTY(BlueprintReadOnly)
-    int32 WaveRemainingMonsters;
+	UPROPERTY(BlueprintReadOnly)
+		int32 WaveRemainingMonsters;
 
-    UPROPERTY(BlueprintReadOnly)
-    int32 WaveTotalMonsters;
+	UPROPERTY(BlueprintReadOnly)
+		int32 WaveTotalMonsters;
 
-    UPROPERTY(BlueprintReadOnly)
-    int32 WaveSpawnedMonsters;
+	UPROPERTY(BlueprintReadOnly)
+		int32 WaveSpawnedMonsters;
 
-    UPROPERTY(BlueprintReadOnly)
-    FVector CrystalPosition;
+	UPROPERTY(BlueprintReadOnly)
+		FVector CrystalPosition;
 
-    FWaveDefinition *CurrentWaveDefinition;
+	FWaveDefinition* CurrentWaveDefinition;
 
-    TMap<TSubclassOf<AMonsterAI>, int> RemainingMobToSpawn;
+	TMap<TSubclassOf<AMonsterAI>, int> RemainingMobToSpawn;
 
-    float SpawnMobInterval;
-    float SpawnMobTimer;
+	float SpawnMobInterval;
+	float SpawnMobTimer;
 };
