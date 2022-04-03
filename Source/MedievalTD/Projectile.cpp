@@ -56,7 +56,7 @@ FVector AProjectile::LaunchToTarget(AMonsterAI& target)
 	FVector projectileStartPoint = GetActorLocation();
 	
 	FVector enemyStartPoint = target.GetActorLocation() + FVector(0.0f, 0.0f, 50.0f);
-	FVector enemyVelocity = target.GetActorForwardVector() * target.VelocityMagnitude;
+	FVector enemyVelocity = target.GetActorForwardVector() * target.ActualVelocityMagnitude;
 	FVector enemyVelocitySqr = enemyVelocity * enemyVelocity;
 	FVector enemyStartPointSqr = enemyStartPoint * enemyStartPoint;
 	FVector projectileStartPointSqr = projectileStartPoint * projectileStartPoint;

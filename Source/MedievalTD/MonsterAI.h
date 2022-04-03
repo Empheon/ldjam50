@@ -46,6 +46,9 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 		float VelocityMagnitude;
 
+	UPROPERTY(BlueprintReadOnly)
+	float ActualVelocityMagnitude;
+
 	UPROPERTY(VisibleAnywhere)
 		USkeletalMeshComponent* SkMeshComponent;
 
