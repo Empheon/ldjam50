@@ -16,7 +16,14 @@ ABuilding::ABuilding()
 void ABuilding::BeginPlay()
 {
 	Super::BeginPlay();
-	MaxHealth = Health = LevelDefinitions[0].Health;
+	if(LevelDefinitions.Num() > 0)
+	{
+		MaxHealth = Health = LevelDefinitions[0].Health;
+	}
+	else
+	{
+		MaxHealth = Health = 100;
+	}
 }
 
 // Called every frame
