@@ -103,7 +103,6 @@ void AMonsterAI::Attack()
         return;
     }
 
-    UE_LOG(LogTemp, Warning, TEXT("Atacc"));
     m_currentBuilding->TakeHit(Damage);
 }
 
