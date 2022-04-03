@@ -27,7 +27,7 @@ void AMonsterAI::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (m_monsterState == RUN)
+	if (MonsterState == RUN)
 	{
 		SetActorRotation(UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), TargetLocation));
 
@@ -37,7 +37,7 @@ void AMonsterAI::Tick(float DeltaTime)
 		SetActorLocation(newPos, true);
 	}
 
-	if (m_monsterState == ATTACK)
+	if (MonsterState == ATTACK)
 	{
 		m_attackTimer -= DeltaTime;
 
@@ -52,13 +52,14 @@ void AMonsterAI::Tick(float DeltaTime)
 
 void AMonsterAI::OnBuildingCollisionStart()
 {
-	m_monsterState = ATTACK;
+	MonsterState = ATTACK;
+	VelocityMagnitude = 0;
 	m_attackTimer = -1;
 }
 
 void AMonsterAI::OnBuildingCollisionEnd()
 {
-	m_monsterState = RUN;
+	MonsterState = RUN;
 }
 
 void AMonsterAI::Attack()
