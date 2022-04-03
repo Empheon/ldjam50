@@ -23,6 +23,7 @@ void ABuilding::BeginPlay()
 void ABuilding::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	Health = FMath::Min(MaxHealth, Health + HealthRegenPerSecond * DeltaTime);
 }
 
 void ABuilding::Destroy()

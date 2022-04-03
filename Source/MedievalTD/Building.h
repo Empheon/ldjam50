@@ -26,6 +26,8 @@ public:
 		float Health;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		bool Popup = true;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+		float HealthRegenPerSecond = 1;
 	UFUNCTION(BlueprintCallable)
 		virtual void Destroy();
 	UFUNCTION(BlueprintCallable)
