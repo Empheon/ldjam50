@@ -44,8 +44,11 @@ void AMonsterAI::Tick(float DeltaTime)
     {
         targetRotation = UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), TargetLocation);
 
-        FVector newPos = FMath::VInterpConstantTo(GetActorLocation(), TargetLocation, DeltaTime, Speed);
-        VelocityMagnitude = (GetActorLocation() - newPos).Size() * Speed;
+		FVector newPos = FMath::VInterpConstantTo(GetActorLocation(), TargetLocation, DeltaTime, Speed);
+		VelocityMagnitude = (GetActorLocation() - newPos).Size() * Speed;
+	
+		SetActorLocation(newPos);
+	}
 
         SetActorLocation(newPos, true);
     }
