@@ -113,7 +113,7 @@ void AProjectile::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, clas
 		{
 			if(ImpactRadius <= 0)
 			{
-				//Monster->MonsterTakeDamage(Damage);
+				Monster->TakeHit(Damage);
 			}
 			OnImpactWithMob(Monster);
 			Destroy();

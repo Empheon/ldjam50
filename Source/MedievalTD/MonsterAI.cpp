@@ -65,6 +65,15 @@ void AMonsterAI::OnBuildingCollisionEnd()
 	MonsterState = RUN;
 }
 
+void AMonsterAI::TakeHit(float damage)
+{
+	Health -= damage;
+	if (Health <= 0)
+	{
+		Destroy();
+	}
+}
+
 void AMonsterAI::Attack()
 {
 	if (!IsValid(m_currentBuilding))

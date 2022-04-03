@@ -59,6 +59,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void OnBuildingCollisionEnd();
 
+	void TakeHit(float damage);
+
 private:
 
 	float m_attackInterval = 1.0f;
