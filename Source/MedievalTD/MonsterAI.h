@@ -7,8 +7,8 @@
 #include "MonsterAI.generated.h"
 
 
-
-enum MonsterState
+UENUM(BlueprintType)
+enum EMonsterState
 {
 	RUN,
 	ATTACK
@@ -35,6 +35,9 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	USkeletalMeshComponent* SkMeshComponent;
 
+	UPROPERTY(BlueprintReadOnly)
+	TEnumAsByte<EMonsterState> MonsterState = RUN;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -50,7 +53,6 @@ public:
 	void OnBuildingCollisionEnd();
 
 private:
-	MonsterState m_monsterState = RUN;
 
 	float m_attackInterval = 1.0f;
 	float m_attackTimer;
