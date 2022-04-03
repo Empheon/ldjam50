@@ -21,6 +21,8 @@ public:
 		int Level = 0;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float Health = 100;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		bool Popup = true;
 	UFUNCTION(BlueprintCallable)
 		virtual void Destroy();
 	UFUNCTION(BlueprintCallable)
