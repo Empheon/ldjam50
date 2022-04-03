@@ -48,7 +48,7 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 	float TimeBeforeNextShoot;
 
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int Damage;
 
 	UFUNCTION(BlueprintImplementableEvent)
