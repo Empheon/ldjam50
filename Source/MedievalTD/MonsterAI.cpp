@@ -2,6 +2,8 @@
 
 
 #include "MonsterAI.h"
+
+#include "Building.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 
@@ -50,11 +52,12 @@ void AMonsterAI::Tick(float DeltaTime)
 	}
 }
 
-void AMonsterAI::OnBuildingCollisionStart()
+void AMonsterAI::OnBuildingCollisionStart(ABuilding* building)
 {
 	MonsterState = ATTACK;
 	VelocityMagnitude = 0;
 	m_attackTimer = -1;
+	m_currentBuilding = building;
 }
 
 void AMonsterAI::OnBuildingCollisionEnd()
@@ -62,8 +65,23 @@ void AMonsterAI::OnBuildingCollisionEnd()
 	MonsterState = RUN;
 }
 
+void AMonsterAI::TakeHit(float damage)
+{
+	Health -= damage;
+	if (Health <= 0)
+	{
+		Destroy();
+	}
+}
+
 void AMonsterAI::Attack()
 {
+	if (!IsValid(m_currentBuilding))
+	{
+		return;
+	}
+	
 	UE_LOG(LogTemp, Warning, TEXT("Atacc"));
+	m_currentBuilding->TakeHit(Damage);
 }
 

@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Building.h"
 #include "GameFramework/Actor.h"
 #include "MonsterAI.generated.h"
 
@@ -29,6 +30,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float Speed = 100.0f;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float Damage = 20.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float Health = 10.0f;
+
 	UPROPERTY(BlueprintReadOnly)
 	float VelocityMagnitude;
 
@@ -47,15 +54,18 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UFUNCTION(BlueprintCallable)
-	void OnBuildingCollisionStart();
+	void OnBuildingCollisionStart(ABuilding* building);
 	
 	UFUNCTION(BlueprintCallable)
 	void OnBuildingCollisionEnd();
+
+	void TakeHit(float damage);
 
 private:
 
 	float m_attackInterval = 1.0f;
 	float m_attackTimer;
+	ABuilding* m_currentBuilding;
 
 	void Attack();
 };
