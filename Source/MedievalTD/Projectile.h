@@ -29,6 +29,12 @@ public:
 	
 	UPROPERTY(BlueprintReadOnly)
 	float ImpactRadius;
+
+	UPROPERTY(BlueprintReadOnly)
+	bool CanShootGround;
+	
+	UPROPERTY(BlueprintReadOnly)
+	bool CanShootAir;
 	
 	UFUNCTION()
 	void OnOverlapBegin(UPrimitiveComponent* PrimitiveComponent, AActor* Actor, UPrimitiveComponent* PrimitiveComponent1, int I, bool bArg, const FHitResult& HitResult);

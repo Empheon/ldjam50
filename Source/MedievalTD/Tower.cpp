@@ -67,6 +67,8 @@ bool ATower::TryShoot()
 			FVector dir = Projectile->LaunchToTarget(*minMonster);
 			Projectile->Damage = LevelDefinitions[Level].Damage;
 			Projectile->ImpactRadius = LevelDefinitions[Level].ImpactRadius;
+			Projectile->CanShootAir = CanShootAir;
+			Projectile->CanShootGround = CanShootGround;
 			OnShoot(dir);
 			return true;
 		}
@@ -84,7 +86,10 @@ void ATower::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AAc
 		AMonsterAI* Monster = Cast<AMonsterAI>(OtherActor);
 		if(Monster)
 		{
-			MonstersInRange.Add(Monster);
+			if((Monster->IsFlying && CanShootAir) || (!Monster->IsFlying && CanShootGround))
+			{
+				MonstersInRange.Add(Monster);
+			}
 		}
 	}
 } 
@@ -96,7 +101,10 @@ void ATower::OnOverlapEnd(class UPrimitiveComponent* OverlappedComp, class AActo
 		AMonsterAI* Monster = Cast<AMonsterAI>(OtherActor);
 		if(Monster)
 		{
-			MonstersInRange.Remove(Monster);
+			if(((Monster->IsFlying && CanShootAir) || (!Monster->IsFlying && CanShootGround)))
+			{
+				MonstersInRange.Remove(Monster);
+			}
 		}
 	}
 }

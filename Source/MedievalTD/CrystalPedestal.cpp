@@ -7,6 +7,11 @@
 
 void ACrystalPedestal::Destroy()
 {
+	if(!GameOverWidget)
+	{
+		return;
+	}
+	
 	APlayerController* pc = UGameplayStatics::GetPlayerController(GetWorld(), 0);
 	
 	CreateWidget<UUserWidget>(pc, GameOverWidget)->AddToViewport();

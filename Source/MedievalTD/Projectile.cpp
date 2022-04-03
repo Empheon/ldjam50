@@ -116,12 +116,15 @@ void AProjectile::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, clas
 		AMonsterAI* Monster = Cast<AMonsterAI>(OtherActor);
 		if(Monster)
 		{
-			if(ImpactRadius <= 0)
+			if((Monster->IsFlying && CanShootAir) || (!Monster->IsFlying && CanShootGround))
 			{
-				Monster->TakeHit(Damage);
+				if(ImpactRadius <= 0)
+				{
+					Monster->TakeHit(Damage);
+				}
+				OnImpactWithMob(Monster);
+				Destroy();
 			}
-			OnImpactWithMob(Monster);
-			Destroy();
 		}
 
 		if(OtherComp->GetCollisionProfileName() == "Ground" || OtherComp->GetCollisionProfileName() == "Landscape")
@@ -143,7 +146,14 @@ void AProjectile::OnImpact(AActor* OtherActor)
 
 		for (AActor* OutActor : outActors)
 		{
-			((AMonsterAI*)OutActor)->TakeHit(Damage);
+			AMonsterAI* MonsterAI = Cast<AMonsterAI>(OutActor);
+			if(MonsterAI)
+			{
+				if((MonsterAI->IsFlying && CanShootAir) || (!MonsterAI->IsFlying && CanShootGround))
+				{
+					MonsterAI->TakeHit(Damage);
+				}
+			}
 		}
 	}
 	

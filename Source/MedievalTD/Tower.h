@@ -38,6 +38,12 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FVector ProjectileSpawnLocation;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool CanShootGround = true;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool CanShootAir = true;
 	
 	UPROPERTY(BlueprintReadOnly)
 	float TimeBeforeNextShoot;
