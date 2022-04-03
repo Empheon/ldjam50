@@ -18,6 +18,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int NextUpgradeCost;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int Health;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int Damage;

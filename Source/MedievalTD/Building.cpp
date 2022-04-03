@@ -16,7 +16,7 @@ ABuilding::ABuilding()
 void ABuilding::BeginPlay()
 {
 	Super::BeginPlay();
-	this->BaseHealth = this->Health;
+	MaxHealth = Health = LevelDefinitions[0].Health;
 }
 
 // Called every frame
@@ -45,6 +45,12 @@ void ABuilding::Upgrade()
 		pc->Money -= currentPrice;
 		
 		this->Level++;
+		
+		float maxHealth = LevelDefinitions[Level].Health;
+		float percentUpgrade = maxHealth / MaxHealth;
+		Health *= percentUpgrade;
+		MaxHealth = maxHealth;
+		
 		TArray<USceneComponent*> children;
 		this->RootComponent->GetChildrenComponents(true, children);
 		for (auto i = 0; i < children.Num(); i++) {
@@ -71,5 +77,5 @@ float ABuilding::GetHealth_Implementation() {
 }
 
 float ABuilding::GetBaseHealth_Implementation() {
-	return this->BaseHealth;
+	return this->MaxHealth;
 }

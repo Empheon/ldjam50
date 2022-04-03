@@ -22,8 +22,8 @@ public:
 		TArray<FBuildLevelDefinition> LevelDefinitions;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		int Level = 0;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		float Health = 100;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+		float Health;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		bool Popup = true;
 	UFUNCTION(BlueprintCallable)
@@ -44,5 +44,5 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
-	float BaseHealth = 100;
+	float MaxHealth = 100;
 };
