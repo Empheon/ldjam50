@@ -66,6 +66,7 @@ bool ATower::TryShoot()
 		{
 			FVector dir = Projectile->LaunchToTarget(*minMonster);
 			Projectile->Damage = Damage;
+			Projectile->ImpactRadius = ImpactRadius;
 			OnShoot(dir);
 			return true;
 		}

@@ -3,6 +3,7 @@
 #include "MonsterAI.h"
 
 #include "Building.h"
+#include "MedievalTDGameModeBase.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 
@@ -83,11 +84,16 @@ void AMonsterAI::OnBuildingCollisionEnd()
 
 void AMonsterAI::TakeHit(float damage)
 {
-    Health -= damage;
-    if (Health <= 0)
-    {
-        Destroy();
-    }
+	Health -= damage;
+	if (Health <= 0)
+	{
+		AMedievalTDGameModeBase* GameModeBase = Cast<AMedievalTDGameModeBase>(GetWorld()->GetAuthGameMode());
+		if(GameModeBase)
+		{
+			GameModeBase->WaveRemainingMonsters--;
+		}
+		Destroy();
+	}
 }
 
 void AMonsterAI::Attack()

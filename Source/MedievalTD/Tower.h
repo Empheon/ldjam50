@@ -50,6 +50,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int Damage;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float ImpactRadius;
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void OnShoot(FVector direction);

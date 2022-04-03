@@ -5,6 +5,7 @@
 
 #include "DrawDebugHelpers.h"
 #include "Components/SphereComponent.h"
+#include "Kismet/KismetSystemLibrary.h"
 
 
 // Sets default values
@@ -133,5 +134,18 @@ void AProjectile::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, clas
 
 void AProjectile::OnImpact(AActor* OtherActor)
 {
+	if(ImpactRadius > 0)
+	{
+		static TArray<TEnumAsByte<EObjectTypeQuery>> ObjectTypes;
+		static TArray<AActor*> outActors;
+		static TArray<AActor*> actorsToIgnore;
+		UKismetSystemLibrary::SphereOverlapActors(GetWorld(), GetActorLocation(), ImpactRadius, ObjectTypes, AMonsterAI::StaticClass(), actorsToIgnore, outActors);
+
+		for (AActor* OutActor : outActors)
+		{
+			((AMonsterAI*)OutActor)->TakeHit(Damage);
+		}
+	}
 	
+	OnImpactBP();
 }
