@@ -9,6 +9,6 @@ public class MedievalTDTarget : TargetRules
 	{
 		Type = TargetType.Game;
 		DefaultBuildSettings = BuildSettingsVersion.V2;
-		ExtraModuleNames.AddRange( new string[] { "MedievalTD" } );
+		ExtraModuleNames.AddRange( new string[] { "MedievalTD", "UMG", "Slate", "SlateCore" } );
 	}
 }
