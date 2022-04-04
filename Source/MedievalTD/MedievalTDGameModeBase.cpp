@@ -2,6 +2,7 @@
 
 #include "MedievalTDGameModeBase.h"
 
+#include "Generator.h"
 #include "TextFX.h"
 #include "GameFramework/GameSession.h"
 
@@ -112,6 +113,23 @@ void AMedievalTDGameModeBase::TickWave(float DeltaSeconds)
 
 void AMedievalTDGameModeBase::TickBetweenWave(float DeltaSeconds)
 {
+	if(WaveIndex == 0)
+	{
+		bool containsGenerator = false;
+		for (ABuilding* Building : Buildings)
+		{
+			if(Cast<AGenerator>(Building))
+			{
+				containsGenerator = true;
+				break;
+			}
+		}
+
+		if(!containsGenerator)
+		{
+			return;
+		}
+	}
 	TimeBeforeNextWave -= DeltaSeconds;
 
 	if (TimeBeforeNextWave <= 0.0f)

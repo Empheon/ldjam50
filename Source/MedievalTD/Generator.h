@@ -18,6 +18,9 @@ class MEDIEVALTD_API AGenerator : public ABuilding
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int CoinEarned = 10;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int AdditionalCoinPerWave = 7;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float GenerateInterval = 1;

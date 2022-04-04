@@ -33,14 +33,15 @@ void AGenerator::Tick(float DeltaTime)
 		return;
 	if (this->pc == NULL)
 		return;
-	
-	this->pc->Money += CoinEarned;
-	this->timer = 0;
 
 	AMedievalTDGameModeBase* GameModeBase = Cast<AMedievalTDGameModeBase>(GetWorld()->GetAuthGameMode());
 	if(GameModeBase)
 	{
-		auto text = FString::Printf(TEXT("+%d"), CoinEarned);
+		int reward = CoinEarned + GameModeBase->WaveIndex * AdditionalCoinPerWave;
+		this->pc->Money += reward;
+		this->timer = 0;
+		
+		auto text = FString::Printf(TEXT("+%d"), reward);
 		GameModeBase->SpawnTextFX(text, GetActorLocation());
 	}
 }
