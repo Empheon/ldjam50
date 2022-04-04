@@ -37,6 +37,7 @@ void AMedievalTDPlayerController::OnPlaceBuildingPressed(int x, int y, TArray<AA
 
 	auto newActor = GetWorld()->SpawnActor(this->SelectedBuilding.Building, &myLoc, &myRot);
 	auto newBuilding = (ABuilding*)newActor;
+	newBuilding->PricePayed = price;
 	gameMode->AddBuilding(newBuilding);
 
 }

@@ -29,7 +29,11 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		bool Popup = true;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-		float HealthRegenPerSecond = 1;
+		float HealthRegenPerSecond = 2;
+	UPROPERTY(BlueprintReadOnly)
+		int PricePayed = 0;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float BuildHeight = 200;
 	UFUNCTION(BlueprintCallable)
 		virtual void Destroy();
 	UFUNCTION(BlueprintCallable)
