@@ -17,6 +17,9 @@ public:
 	UStaticMesh* LevelMesh;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UStaticMesh* WeaponMesh;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int NextUpgradeCost;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

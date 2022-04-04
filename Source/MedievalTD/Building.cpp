@@ -85,9 +85,11 @@ void ABuilding::Upgrade()
 		this->RootComponent->GetChildrenComponents(true, children);
 		for (auto i = 0; i < children.Num(); i++) {
 			auto component = Cast<UStaticMeshComponent>(children[i]);
-			if (component) {
+			if (component && component->ComponentHasTag("Tower")) {
 				component->SetStaticMesh(this->LevelDefinitions[this->Level].LevelMesh);
-				break;
+			} else if (component && component->ComponentHasTag("Weapon") && LevelDefinitions[this->Level].WeaponMesh)
+			{
+				component->SetStaticMesh(this->LevelDefinitions[this->Level].WeaponMesh);
 			}
 		}
 	}
