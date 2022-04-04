@@ -13,7 +13,8 @@ UENUM(BlueprintType)
 enum EMonsterState
 {
 	RUN,
-	ATTACK
+	ATTACK,
+	DEAD
 };
 
 USTRUCT(BlueprintType)
@@ -81,6 +82,7 @@ public:
 
 	float GetHealth_Implementation() override;
 	float GetBaseHealth_Implementation() override;
+	bool IsDead;
 
 protected:
 	// Called when the game starts or when spawned
@@ -99,6 +101,9 @@ public:
 	void TakeHit(float damage);
 
 	void SetLevel(int level);
+
+	UFUNCTION(BlueprintCallable)
+	void DestroyAux();
 
 private:
 

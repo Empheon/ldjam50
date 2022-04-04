@@ -47,7 +47,7 @@ bool ATower::TryShoot()
 	AMonsterAI* minMonster = nullptr;
 	for (AMonsterAI* mob : MonstersInRange)
 	{
-		if(mob)
+		if(mob && !mob->IsDead)
 		{
 			float dist = (pos - mob->GetActorLocation()).SizeSquared();
 			if(dist < minDist)

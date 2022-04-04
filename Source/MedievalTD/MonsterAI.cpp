@@ -31,6 +31,10 @@ void AMonsterAI::BeginPlay()
 void AMonsterAI::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
+	if (IsDead)
+	{
+		return;
+	}
 
     if (IsFlying)
     {
@@ -75,6 +79,10 @@ void AMonsterAI::Tick(float DeltaTime)
 
 void AMonsterAI::OnBuildingCollisionStart(ABuilding *building)
 {
+	if (IsDead)
+	{
+		return;
+	}
     MonsterState = ATTACK;
     VelocityMagnitude = 0;
     m_attackTimer = -1;
@@ -83,6 +91,10 @@ void AMonsterAI::OnBuildingCollisionStart(ABuilding *building)
 
 void AMonsterAI::OnBuildingCollisionEnd()
 {
+	if (IsDead)
+	{
+		return;
+	}
     MonsterState = RUN;
 }
 
@@ -91,6 +103,10 @@ void AMonsterAI::TakeHit(float damage)
 	Health -= damage;
 	if (Health <= 0)
 	{
+		IsDead = true;
+		MonsterState = DEAD;
+		VelocityMagnitude = 0;
+		
 		AMedievalTDGameModeBase* GameModeBase = Cast<AMedievalTDGameModeBase>(GetWorld()->GetAuthGameMode());
 		if(GameModeBase)
 		{
@@ -102,7 +118,6 @@ void AMonsterAI::TakeHit(float damage)
 	    {
 	    	pc->Money += MoneyGiven;
 	    }
-		Destroy();
 	}
 }
 
@@ -133,6 +148,11 @@ void AMonsterAI::Attack()
     }
 
     m_currentBuilding->TakeHit(Damage);
+}
+
+void AMonsterAI::DestroyAux()
+{
+	Destroy();
 }
 
 float AMonsterAI::GetHealth_Implementation()
