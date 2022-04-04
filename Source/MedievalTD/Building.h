@@ -7,6 +7,8 @@
 #include "Health.h"
 #include "GameFramework/Actor.h"
 #include "BuildLevelDefinition.h"
+#include "Components/TimelineComponent.h"
+#include "Components/TimelineComponent.h"
 #include "Building.generated.h"
 
 /**
@@ -32,6 +34,12 @@ public:
 		virtual void Destroy();
 	UFUNCTION(BlueprintCallable)
 		virtual void Upgrade();
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		UTimelineComponent* TimelineComp;
+	UPROPERTY(EditAnywhere)
+		UCurveFloat* SpawnTimelineFloatCurve;
+
+	
 	float GetHealth_Implementation() override;
 	float GetBaseHealth_Implementation() override;
 	void TakeHit(float damage);
@@ -47,4 +55,9 @@ protected:
 
 private:
 	float MaxHealth = 100;
+
+	FOnTimelineFloat UpdateSpawnTimelineFunction;
+
+	UFUNCTION()
+	void UpdateTimelineComp(float Output);
 };

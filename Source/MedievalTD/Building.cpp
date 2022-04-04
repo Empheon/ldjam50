@@ -10,6 +10,14 @@ ABuilding::ABuilding()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	TimelineComp = CreateDefaultSubobject<UTimelineComponent>(TEXT("TimelineComp"));
+
+	const ConstructorHelpers::FObjectFinder<UCurveFloat> Curve(TEXT("CurveFloat'/Game/Resources/BuildSpawnCurve'"));
+	if(Curve.Succeeded())
+	{
+		SpawnTimelineFloatCurve = Curve.Object;
+	}
 }
 
 // Called when the game starts or when spawned
@@ -24,6 +32,17 @@ void ABuilding::BeginPlay()
 	{
 		MaxHealth = Health = 100;
 	}
+
+	UpdateSpawnTimelineFunction.BindDynamic(this, &ABuilding::UpdateTimelineComp);
+
+	//If we have a float curve, bind it's graph to our update functionq
+	if (SpawnTimelineFloatCurve)
+	{
+
+		TimelineComp->AddInterpFloat(SpawnTimelineFloatCurve, UpdateSpawnTimelineFunction);
+	}
+
+	TimelineComp->Play();
 }
 
 // Called every frame
@@ -78,6 +97,14 @@ void ABuilding::TakeHit(float damage)
 	{
 		Destroy();
 	}
+}
+
+
+void ABuilding::UpdateTimelineComp(float Output)
+{
+	FVector ActorLocation = GetActorLocation();
+	ActorLocation[2] = Output;
+	SetActorLocation(ActorLocation);
 }
 
 float ABuilding::GetHealth_Implementation() {
