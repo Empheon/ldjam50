@@ -23,7 +23,7 @@ struct FLevelInfo
 	GENERATED_BODY()
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float Speed = 100;
+	float Speed = 200;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float Damage = 10;
