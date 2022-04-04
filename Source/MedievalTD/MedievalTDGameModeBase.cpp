@@ -234,8 +234,11 @@ void AMedievalTDGameModeBase::SpawnRandomMob()
 	SpawnParameters.bNoFail = true;
 	AMonsterAI* MonsterAI = Cast<AMonsterAI>(
 		GetWorld()->SpawnActor(pickedMob.MobClass, &spawnLocation, &rot, SpawnParameters));
-	MonsterAI->SetLevel(pickedMob.Level);
-	MonsterAI->TargetLocation = CrystalPosition;
+	if(MonsterAI)
+	{
+		MonsterAI->SetLevel(pickedMob.Level);
+		MonsterAI->TargetLocation = CrystalPosition;
+	}
 }
 
 void AMedievalTDGameModeBase::SpawnTextFX(FString& text, FVector pos)
