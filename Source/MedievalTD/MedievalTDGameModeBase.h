@@ -82,6 +82,9 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 		FVector CrystalPosition;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	USoundBase* StartWaveSound;
+
 	FWaveDefinition* CurrentWaveDefinition;
 
 	TArray<FMobInfo> RemainingMobToSpawn;

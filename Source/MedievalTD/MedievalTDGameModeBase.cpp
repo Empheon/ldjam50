@@ -5,6 +5,7 @@
 #include "Generator.h"
 #include "TextFX.h"
 #include "GameFramework/GameSession.h"
+#include "Kismet/GameplayStatics.h"
 
 void AMedievalTDGameModeBase::AddBuilding(ABuilding* building)
 {
@@ -140,6 +141,7 @@ void AMedievalTDGameModeBase::TickBetweenWave(float DeltaSeconds)
 
 void AMedievalTDGameModeBase::StartNextWave()
 {
+	UGameplayStatics::PlaySound2D(this, StartWaveSound);
 	IsWaveOngoing = true;
 
 	CurrentWaveDefinition = &WaveDefinitions[FMath::Min(WaveIndex, WaveDefinitions.Num() - 1)];
