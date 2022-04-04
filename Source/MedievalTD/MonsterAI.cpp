@@ -25,7 +25,6 @@ void AMonsterAI::BeginPlay()
 {
     Super::BeginPlay();
 	SetActorScale3D(GetActorScale3D() * 0.7f);
-    this->BaseHealth = this->Health;
 }
 
 // Called every frame
@@ -113,8 +112,17 @@ void AMonsterAI::SetLevel(int level)
 
 	if (level < LevelInfos.Num())
 	{
-		SkMeshComponent->SetMaterial(0, LevelInfos[Level].Material);
+		FLevelInfo levelInfo = LevelInfos[Level];
+		
+		SkMeshComponent->SetMaterial(0, levelInfo.Material);
+		Health = levelInfo.Health;
+		Speed = levelInfo.Speed;
+		Damage = levelInfo.Damage;
+		MoneyGiven = levelInfo.MoneyGiven;
 	}
+
+	
+	this->BaseHealth = this->Health;
 }
 
 void AMonsterAI::Attack()
