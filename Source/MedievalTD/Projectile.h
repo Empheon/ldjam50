@@ -18,7 +18,7 @@ public:
 	// Sets default values for this actor's properties
 	AProjectile();
 
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	USphereComponent* CollisionComponent;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
