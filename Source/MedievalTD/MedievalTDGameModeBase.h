@@ -8,6 +8,7 @@
 #include "GameFramework/GameModeBase.h"
 #include "MedievalTDGameModeBase.generated.h"
 
+class ATextFX;
 /**
  *
  */
@@ -39,10 +40,17 @@ public:
 		TMap<TSubclassOf<ABuilding>, int> PriceIncreaseMap;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		TArray<ABuilding*> Buildings;
+	UPROPERTY(BlueprintReadOnly)
+		TArray<ATextFX*> TextFXPool;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		TSubclassOf<ATextFX> TextFXClass;
 	UFUNCTION(BlueprintCallable)
 		void AddBuilding(ABuilding* building);
 	UFUNCTION(BlueprintCallable)
 		void RemoveBuilding(ABuilding* building);
+
+	UFUNCTION(BlueprintCallable)
+	void SpawnTextFX(FString& text, FVector pos);
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		UClass* CrystalPedestalClass;
@@ -52,7 +60,7 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		TArray<FWaveDefinition> WaveDefinitions;
-
+	
 	UPROPERTY(BlueprintReadOnly)
 		float TimeBeforeNextWave = 10;
 

@@ -2,6 +2,8 @@
 
 
 #include "Generator.h"
+
+#include "MedievalTDGameModeBase.h"
 #include "MedievalTDPlayerController.h"
 
 void AGenerator::BeginPlay()
@@ -27,11 +29,18 @@ void AGenerator::Tick(float DeltaTime)
 	// https://unreal.blog/how-to-print-strings-to-console-or-screen-in-unreal-engine-c-at-runtime
 	// UE_LOG(LogTemp, Warning, TEXT("Output: %f"), this->timer);
 
-	if (this->timer < 1)
+	if (this->timer < GenerateInterval)
 		return;
 	if (this->pc == NULL)
 		return;
 	
-	this->pc->Money += 1 * (this->Level + 1);
+	this->pc->Money += CoinEarned;
 	this->timer = 0;
+
+	AMedievalTDGameModeBase* GameModeBase = Cast<AMedievalTDGameModeBase>(GetWorld()->GetAuthGameMode());
+	if(GameModeBase)
+	{
+		auto text = FString::Printf(TEXT("+%d"), CoinEarned);
+		GameModeBase->SpawnTextFX(text, GetActorLocation());
+	}
 }

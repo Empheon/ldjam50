@@ -35,6 +35,9 @@ struct FLevelInfo
 	int MoneyGiven = 1;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float Scale = 0.7f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UMaterialInstance* Material;
 };
 

@@ -23,7 +23,7 @@ void ATower::BeginPlay()
 {
 	Super::BeginPlay();
 
-	TimeBeforeNextShoot = LevelDefinitions[Level].ShootCooldownDuration;
+	TimeBeforeNextShoot = 0.3f;
 }
 
 void ATower::Tick(float DeltaSeconds)

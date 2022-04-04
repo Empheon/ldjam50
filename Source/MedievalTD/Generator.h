@@ -16,6 +16,12 @@ class MEDIEVALTD_API AGenerator : public ABuilding
 	GENERATED_BODY()
 
 public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int CoinEarned = 10;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float GenerateInterval = 1;
+	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 

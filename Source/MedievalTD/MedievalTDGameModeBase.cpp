@@ -1,6 +1,8 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "MedievalTDGameModeBase.h"
+
+#include "TextFX.h"
 #include "GameFramework/GameSession.h"
 
 void AMedievalTDGameModeBase::AddBuilding(ABuilding* building)
@@ -48,6 +50,13 @@ void AMedievalTDGameModeBase::EndWave()
 void AMedievalTDGameModeBase::BeginPlay()
 {
 	Super::BeginPlay();
+
+	for(int i = 0; i < 50; i++)
+	{
+		ATextFX* textFX = (ATextFX*) GetWorld()->SpawnActor(TextFXClass);
+		textFX->SetHidden(true);
+		TextFXPool.Add(textFX);
+	}
 
 	APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
 	AActor* playerStart = FindPlayerStart(PlayerController);
@@ -209,4 +218,18 @@ void AMedievalTDGameModeBase::SpawnRandomMob()
 		GetWorld()->SpawnActor(pickedMob.MobClass, &spawnLocation, &rot, SpawnParameters));
 	MonsterAI->SetLevel(pickedMob.Level);
 	MonsterAI->TargetLocation = CrystalPosition;
+}
+
+void AMedievalTDGameModeBase::SpawnTextFX(FString& text, FVector pos)
+{
+	for (ATextFX* FXPool : TextFXPool)
+	{
+		if(FXPool->IsHidden())
+		{
+			FXPool->SetActorLocation(pos);
+			FXPool->SetHidden(false);
+			FXPool->OnTextSet(text);
+			break;
+		}
+	}
 }

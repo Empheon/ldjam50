@@ -24,7 +24,6 @@ AMonsterAI::AMonsterAI()
 void AMonsterAI::BeginPlay()
 {
     Super::BeginPlay();
-	SetActorScale3D(GetActorScale3D() * 0.7f);
 }
 
 // Called every frame
@@ -100,6 +99,11 @@ void AMonsterAI::OnBuildingCollisionEnd()
 
 void AMonsterAI::TakeHit(float damage)
 {
+	if(IsDead)
+	{
+		return;
+	}
+	
 	Health -= damage;
 	if (Health <= 0)
 	{
@@ -111,6 +115,8 @@ void AMonsterAI::TakeHit(float damage)
 		if(GameModeBase)
 		{
 			GameModeBase->WaveRemainingMonsters--;
+			auto text = FString::Printf(TEXT("+%d"), MoneyGiven);
+			GameModeBase->SpawnTextFX(text, GetActorLocation());
 		}
 		
 	    AMedievalTDPlayerController* pc = Cast<AMedievalTDPlayerController>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
@@ -135,6 +141,8 @@ void AMonsterAI::SetLevel(int level)
 		Damage = levelInfo.Damage;
 		MoneyGiven = levelInfo.MoneyGiven;
 	}
+
+	SetActorScale3D(GetActorScale3D() * LevelInfos[Level].Scale);
 
 	
 	this->BaseHealth = this->Health;
