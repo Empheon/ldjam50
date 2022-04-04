@@ -35,10 +35,11 @@ void AMonsterAI::Tick(float DeltaTime)
 		return;
 	}
 
+	FVector pos = GetActorLocation();
     if (IsFlying)
     {
         TargetLocation.Z = 250;
-        FVector pos = GetActorLocation();
+        
         pos.Z = 250;
         SetActorLocation(pos);
     }
@@ -47,11 +48,11 @@ void AMonsterAI::Tick(float DeltaTime)
 
     if (MonsterState == RUN)
     {
-        targetRotation = UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), TargetLocation);
+        targetRotation = UKismetMathLibrary::FindLookAtRotation(pos, TargetLocation);
 
-		FVector newPos = FMath::VInterpConstantTo(GetActorLocation(), TargetLocation, DeltaTime, Speed);
-    	float displacement = (GetActorLocation() - newPos).Size();
-    	ActualVelocityMagnitude = displacement / DeltaTime;
+		FVector newPos = FMath::VInterpConstantTo(pos, TargetLocation, DeltaTime, Speed);
+    	float displacement = (pos - newPos).Size();
+    	ActualVelocityMagnitude = Speed;
 		VelocityMagnitude = displacement * Speed;
 	
 		SetActorLocation(newPos);
@@ -60,7 +61,8 @@ void AMonsterAI::Tick(float DeltaTime)
     if (MonsterState == ATTACK)
     {
         m_attackTimer -= DeltaTime;
-
+    	ActualVelocityMagnitude = 0;
+    	
         if (m_attackTimer < 0)
         {
             m_attackTimer = m_attackInterval;
@@ -84,6 +86,7 @@ void AMonsterAI::OnBuildingCollisionStart(ABuilding *building)
 	}
     MonsterState = ATTACK;
     VelocityMagnitude = 0;
+	ActualVelocityMagnitude = 0;
     m_attackTimer = -1;
     m_currentBuilding = building;
 }
