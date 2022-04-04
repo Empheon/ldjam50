@@ -107,6 +107,16 @@ void AMonsterAI::TakeHit(float damage)
 	}
 }
 
+void AMonsterAI::SetLevel(int level)
+{
+	Level = level;
+
+	if (level < LevelInfos.Num())
+	{
+		SkMeshComponent->SetMaterial(0, LevelInfos[Level].Material);
+	}
+}
+
 void AMonsterAI::Attack()
 {
     if (!IsValid(m_currentBuilding))

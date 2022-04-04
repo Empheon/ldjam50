@@ -14,6 +14,25 @@ enum ESpawnSide
 };
 
 
+
+USTRUCT(BlueprintType)
+struct FMobInfo
+{
+	GENERATED_BODY()
+
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TSubclassOf<AMonsterAI> MobClass;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int Count = 1;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int Level;
+
+	inline bool operator==(FMobInfo a) {
+		return a.MobClass == MobClass && a.Count == Count && a.Level == Level;
+	}
+};
+
 USTRUCT(BlueprintType)
 struct FWaveDefinition
 {
@@ -21,7 +40,7 @@ struct FWaveDefinition
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TMap<TSubclassOf<AMonsterAI>, int> MobCount;
+	TArray<FMobInfo> MobInfos;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float TotalSpawnTime = 5;
@@ -29,4 +48,3 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<TEnumAsByte<ESpawnSide>> EnabledSpawnSides;
 };
-

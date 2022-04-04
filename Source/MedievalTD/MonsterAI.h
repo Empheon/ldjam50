@@ -16,6 +16,27 @@ enum EMonsterState
 	ATTACK
 };
 
+USTRUCT(BlueprintType)
+struct FLevelInfo
+{
+	GENERATED_BODY()
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float Speed = 100;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float Damage = 10;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float Health = 10.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int MoneyGiven = 1;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UMaterialInstance* Material;
+};
+
 UCLASS()
 class MEDIEVALTD_API AMonsterAI : public AActor, public IHealth
 {
@@ -24,6 +45,9 @@ class MEDIEVALTD_API AMonsterAI : public AActor, public IHealth
 public:
 	// Sets default values for this actor's properties
 	AMonsterAI();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<FLevelInfo> LevelInfos;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		FVector TargetLocation;
@@ -74,9 +98,12 @@ public:
 
 	void TakeHit(float damage);
 
+	void SetLevel(int level);
+
 private:
 
 	float BaseHealth = 100;
+	int Level;
 	float m_attackInterval = 1.0f;
 	float m_attackTimer;
 	ABuilding* m_currentBuilding;

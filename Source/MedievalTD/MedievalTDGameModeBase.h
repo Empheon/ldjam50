@@ -76,7 +76,7 @@ public:
 
 	FWaveDefinition* CurrentWaveDefinition;
 
-	TMap<TSubclassOf<AMonsterAI>, int> RemainingMobToSpawn;
+	TArray<FMobInfo> RemainingMobToSpawn;
 
 	float SpawnMobInterval;
 	float SpawnMobTimer;
