@@ -87,7 +87,7 @@ void AMonsterAI::OnBuildingCollisionStart(ABuilding *building)
     MonsterState = ATTACK;
     VelocityMagnitude = 0;
 	ActualVelocityMagnitude = 0;
-    m_attackTimer = -1;
+    //m_attackTimer = -1;
     m_currentBuilding = building;
 }
 
