@@ -43,6 +43,8 @@ void ABuilding::BeginPlay()
 	}
 
 	TimelineComp->Play();
+
+	UGameplayStatics::PlaySound2D(this, BuildSound);
 }
 
 // Called every frame
@@ -69,6 +71,7 @@ void ABuilding::Upgrade()
 	AMedievalTDPlayerController* pc = Cast<AMedievalTDPlayerController>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
 	if(pc && pc->Money >= currentPrice)
 	{
+		UGameplayStatics::PlaySound2D(this, UpgradeSound);
 		pc->Money -= currentPrice;
 		
 		this->Level++;

@@ -43,6 +43,11 @@ public:
 	UPROPERTY(EditAnywhere)
 		UCurveFloat* SpawnTimelineFloatCurve;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	USoundBase* BuildSound;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	USoundBase* UpgradeSound;
+
 	
 	float GetHealth_Implementation() override;
 	float GetBaseHealth_Implementation() override;
