@@ -13,11 +13,15 @@ Keyboard/Mouse controls:
 Left click: Build buildings, upgrade towers
 F: Fast forward
 
+## Video
+
+[![GamePlay](https://img.youtube.com/vi/L3Ql3yQQEK8/0.jpg)](https://www.youtube.com/watch?v=L3Ql3yQQEK8)
+
 ## Images
 
+![GamePlay](https://img.itch.zone/aW1hZ2UvMTQ2OTQ2OC84NTg2NzYzLmpwZw==/original/ErUrm3.jpg)
 ![GamePlay](https://img.itch.zone/aW1hZ2UvMTQ2OTQ2OC84NTg2NzY1LmpwZw==/original/ugXKv5.jpg)
 ![GamePlay](https://img.itch.zone/aW1hZ2UvMTQ2OTQ2OC84NTg2NzY0LmpwZw==/original/U3LwjO.jpg)
-![GamePlay](https://img.itch.zone/aW1hZ2UvMTQ2OTQ2OC84NTg2NzYzLmpwZw==/original/ErUrm3.jpg)
 ![GamePlay](https://img.itch.zone/aW1hZ2UvMTQ2OTQ2OC84NTg2NzY2LmpwZw==/original/owl7y3.jpg)
 
 ## Requirements
